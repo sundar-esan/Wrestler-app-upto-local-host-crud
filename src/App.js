@@ -8,13 +8,16 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import { Link, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useHistory } from "react-router-dom";
 import { EditWrestler } from "./EditWrestler";
 import { Welcome } from "./Welcome";
 import { AddWrestler } from "./AddWrestler";
+import AppBar from "@mui/material/AppBar";
+
+import Toolbar from "@mui/material/Toolbar";
 
 function App() {
   const InitialWstlrList = [
@@ -74,18 +77,20 @@ function App() {
 
   return (
     <div className="App">
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-
-        <li>
-          <Link to="/wrestler">Wrestler List</Link>
-        </li>
-        <li>
-          <Link to="/wrestler/add">Add Wrestler</Link>
-        </li>
-      </ul>
+      <AppBar position="static">
+        <Toolbar>
+          <Button color="inherit" onClick={() => history.push("/")}>
+            Home
+          </Button>
+          <Button color="inherit" onClick={() => history.push("/wrestler")}>
+            Wrestler List
+          </Button>
+          <Button color="inherit" onClick={() => history.push("/wrestler/add")}>
+            Add Wrestler
+          </Button>
+        </Toolbar>
+      </AppBar>
+      <div className="route-container">
       <Switch>
         <Route path="/wrestler/add">
           <AddWrestler wstlrList={wstlrList} setWstrlList={setWstrlList} />
@@ -137,6 +142,7 @@ function App() {
           <Welcome />
         </Route>
       </Switch>
+      </div>
     </div>
   );
 }
